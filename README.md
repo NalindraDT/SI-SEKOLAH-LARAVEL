@@ -1,61 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SISEKOLAH - Aplikasi Manajemen Sekolah
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web sederhana untuk manajemen data sekolah yang dibangun dengan framework Laravel dan Livewire. Aplikasi ini memiliki fitur dasar untuk mengelola data siswa, guru, dan kelas, serta menampilkan ringkasan data di dashboard.
 
-## About Laravel
+## Fitur Aplikasi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Otentikasi Pengguna:**
+    -   Halaman login dan register.
+    -   Sistem logout yang terintegrasi di sidebar dan topbar.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   **Manajemen Kelas (CRUD):**
+    -   Menambahkan, melihat, mengedit, dan menghapus data kelas.
+    -   Validasi data yang lengkap.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Manajemen Guru (CRUD):**
+    -   Menambahkan, melihat, mengedit, dan menghapus data guru.
+    -   Sistem filter data guru berdasarkan kelas (membutuhkan data di tabel pivot).
 
-## Learning Laravel
+-   **Manajemen Siswa (CRUD):**
+    -   Menambahkan, melihat, mengedit, dan menghapus data siswa.
+    -   Dropdown untuk memilih kelas saat menambah/mengedit siswa.
+    -   Sistem filter data siswa berdasarkan kelas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   **Dashboard:**
+    -   Menampilkan ringkasan statistik total siswa, kelas, dan guru.
+    -   Menampilkan daftar siswa, kelas, dan guru terbaru.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Teknologi yang Digunakan
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   **Backend:** PHP 8.2+
+-   **Framework:** Laravel
+-   **Interaktivitas:** Livewire 3
+-   **Database:** MySQL
+-   **Dependency Management:** Composer & NPM
+-   **Frontend:** Bootstrap 5 (menggunakan template SB Admin 2)
+-   **Build Tool:** Vite
 
-## Laravel Sponsors
+## Panduan Instalasi dan Penggunaan
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek di lingkungan lokal Anda.
 
-### Premium Partners
+### 1. Klon Repositori dan Instal Dependensi
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+# Klon repositori (jika menggunakan Git)
+# git clone <url-repository> sisekolah
+# cd sisekolah
 
-## Contributing
+# Instal semua dependensi PHP dengan Composer
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Instal dependensi frontend dengan NPM
+npm install
+```
+### 2. Konfigurasi Database dan Lingkungan
 
-## Code of Conduct
+Salin file .env.example menjadi .env dan sesuaikan pengaturan database Anda.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# Salin file .env
+cp .env.example .env
 
-## Security Vulnerabilities
+# Jalankan perintah untuk menghasilkan application key
+php artisan key:generate
+```
+Buka file .env dan perbarui detail database Anda:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```php
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database_anda
+DB_USERNAME=root
+DB_PASSWORD=
+```
+### 3. Migrasi Database dan Seed Data
 
-## License
+Setelah konfigurasi database, jalankan migrasi untuk membuat semua tabel.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+
+# Jalankan migrasi untuk membuat semua tabel
+# Perintah ini akan membuat tabel users, guru, kelas, siswa, dan pivot guru_kelas
+php artisan migrate
+```
+
+### 4. Kompilasi Aset Frontend
+Jalankan perintah ini untuk mengkompilasi semua aset CSS dan JavaScript.
+
+```bash
+npm run dev
+```
+Biarkan terminal ini berjalan di latar belakang selama pengembangan.
+
+### 5. Jalankan Aplikasi
+Jalankan aplikasi dengan perintah berikut:
+
+```bash
+php artisan serve
+```
+Aplikasi Anda sekarang dapat diakses di http://127.0.0.1:8000.
+
+### 6. Penggunaan
+<ul>
+<li>Akses URL utama (http://127.0.0.1:8000) untuk diarahkan ke halaman login.</li>
+<li>Lakukan pendaftaran akun di halaman http://127.0.0.1:8000/register.</li>
+<li>Setelah login, Anda akan masuk ke halaman dashboard yang berisi ringkasan data.</li>
+<li>Gunakan menu navigasi di sidebar untuk mengakses fitur Manajemen Kelas, Guru, dan Siswa</li>
+</ul>
+
+## Lisensi
+Proyek ini dilisensikan di bawah lisensi MIT.
+
+## Kontributor
+Dibuat oleh Nalindra Driyawan Thahai dengan bantuan Gemini.
+
+
+
+
+
+
+
